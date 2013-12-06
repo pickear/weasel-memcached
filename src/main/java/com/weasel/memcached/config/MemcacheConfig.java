@@ -1,8 +1,7 @@
 package com.weasel.memcached.config;
 
+import com.weasel.memcached.memcached.danga.SockIOPool;
 import com.weasel.memcached.util.MemcachePropertiesReader;
-
-import com.danga.MemCached.SockIOPool;
 
 /**
  * @author Dylan
