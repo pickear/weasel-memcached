@@ -12,11 +12,6 @@
 		<relativePath>../weasel-parent/pom.xml</relativePath>
 	</parent>
 
-	<properties>
-		<java-version>1.6</java-version>
-		<org.slf4j-version>1.6.6</org.slf4j-version>
-	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>com.weasel.core</groupId>
