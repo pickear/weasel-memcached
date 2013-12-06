@@ -188,7 +188,7 @@ public class SchoonerSockIOPool {
 	private TreeMap<Long, String> consistentBuckets;
 
 	// map to hold all available sockets
-	Map<String, GenericObjectPool> socketPool;
+	private Map<String, GenericObjectPool> socketPool;
 
 	ConcurrentMap<String, Date> hostDead;
 
@@ -289,7 +289,7 @@ public class SchoonerSockIOPool {
 				throw new IllegalStateException("++++ trying to initialize with no servers");
 			}
 			// pools
-			socketPool = new HashMap<String, GenericObjectPool>(servers.length);
+			setSocketPool(new HashMap<String, GenericObjectPool>(servers.length));
 			hostDead = new ConcurrentHashMap<String, Date>();
 			hostDeadDur = new ConcurrentHashMap<String, Long>();
 			// only create up to maxCreate connections at once
@@ -337,7 +337,7 @@ public class SchoonerSockIOPool {
 			}
 			gop = new GenericObjectPool(factory, maxConn, GenericObjectPool.WHEN_EXHAUSTED_BLOCK, maxIdle, maxConn);
 			factory.setSockets(gop);
-			socketPool.put(servers[i], gop);
+			getSocketPool().put(servers[i], gop);
 		}
 	}
 
@@ -382,7 +382,7 @@ public class SchoonerSockIOPool {
 			}
 			gop = new GenericObjectPool(factory, maxConn, GenericObjectPool.WHEN_EXHAUSTED_BLOCK, maxIdle, maxConn);
 			factory.setSockets(gop);
-			socketPool.put(servers[i], gop);
+			getSocketPool().put(servers[i], gop);
 		}
 	}
 
@@ -398,7 +398,7 @@ public class SchoonerSockIOPool {
 	 *            host to clear
 	 */
 	protected void clearHostFromPool(String host) {
-		GenericObjectPool pool = socketPool.get(host);
+		GenericObjectPool pool = getSocketPool().get(host);
 		pool.clear();
 	}
 
@@ -536,7 +536,7 @@ public class SchoonerSockIOPool {
 		}
 
 		// if we have items in the pool then we can return it
-		GenericObjectPool sockets = socketPool.get(host);
+		GenericObjectPool sockets = getSocketPool().get(host);
 		SchoonerSockIO socket;
 		try {
 
@@ -582,7 +582,7 @@ public class SchoonerSockIOPool {
 	 *            pool to close
 	 */
 	protected final void closeSocketPool() {
-		for (Iterator<GenericObjectPool> i = socketPool.values().iterator(); i.hasNext();) {
+		for (Iterator<GenericObjectPool> i = getSocketPool().values().iterator(); i.hasNext();) {
 			GenericObjectPool sockets = i.next();
 			try {
 				sockets.close();
@@ -602,8 +602,8 @@ public class SchoonerSockIOPool {
 	public void shutDown() {
 		closeSocketPool();
 
-		socketPool.clear();
-		socketPool = null;
+		getSocketPool().clear();
+		setSocketPool(null);
 		buckets = null;
 		consistentBuckets = null;
 		initialized = false;
@@ -1037,6 +1037,14 @@ public class SchoonerSockIOPool {
 
 	public int getBufferSize() {
 		return bufferSize;
+	}
+
+	public Map<String, GenericObjectPool> getSocketPool() {
+		return socketPool;
+	}
+
+	public void setSocketPool(Map<String, GenericObjectPool> socketPool) {
+		this.socketPool = socketPool;
 	}
 
 	public static class UDPSockIO extends SchoonerSockIO {
