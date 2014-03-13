@@ -142,6 +142,7 @@ public class AscIIClient extends MemCachedClient {
 		return delete(key, null, expiry);
 	}
 
+	@SuppressWarnings({ "resource", "unchecked" })
 	public boolean delete(String key, Integer hashCode, Date expiry) {
 
 		if (key == null) {
@@ -332,6 +333,7 @@ public class AscIIClient extends MemCachedClient {
 	 *            if not null, then the int hashcode to use
 	 * @return true/false indicating success
 	 */
+	@SuppressWarnings({ "resource", "unchecked" })
 	private boolean set(String cmdname, String key, Object value, Date expiry, Integer hashCode, Long casUnique,
 			boolean asString) {
 
@@ -530,6 +532,7 @@ public class AscIIClient extends MemCachedClient {
 	 *            if not null, then the int hashcode to use
 	 * @return new value or -1 if not exist
 	 */
+	@SuppressWarnings({ "resource", "unchecked" })
 	private long incrdecr(String cmdname, String key, long inc, Integer hashCode) {
 
 		if (key == null) {
@@ -653,6 +656,7 @@ public class AscIIClient extends MemCachedClient {
 	 *            specified hashcode
 	 * @return memcached item with value in it.
 	 */
+	@SuppressWarnings("unchecked")
 	private Object get(String cmd, String key, Integer hashCode, boolean asString) {
 
 		if (key == null) {
@@ -794,6 +798,7 @@ public class AscIIClient extends MemCachedClient {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	public MemcachedItem gets(String cmd, String key, Integer hashCode, boolean asString) {
 
 		if (key == null) {
@@ -1176,6 +1181,7 @@ public class AscIIClient extends MemCachedClient {
 		return flushAll(null);
 	}
 
+	@SuppressWarnings({ "resource", "unchecked" })
 	public boolean flushAll(String[] servers) {
 
 		// get SockIOPool instance
@@ -1277,6 +1283,7 @@ public class AscIIClient extends MemCachedClient {
 		return stats(servers, String.format("stats cachedump %d %d\r\n", slabNumber, limit), ITEM);
 	}
 
+	@SuppressWarnings({ "resource", "unchecked" })
 	private Map<String, Map<String, String>> stats(String[] servers, String command, String lineStart) {
 
 		if (command == null || command.trim().equals("")) {
@@ -1391,6 +1398,7 @@ public class AscIIClient extends MemCachedClient {
 				channel.register(selector, SelectionKey.OP_WRITE, this);
 			}
 
+			@SuppressWarnings("unchecked")
 			public void close() {
 				try {
 					if (isDone) {
@@ -1576,6 +1584,7 @@ public class AscIIClient extends MemCachedClient {
 		}
 	}
 
+	@SuppressWarnings({ "resource", "unchecked" })
 	public boolean sync(String key, Integer hashCode) {
 		if (key == null) {
 			log.error("null value for key passed to delete()");
@@ -1645,6 +1654,7 @@ public class AscIIClient extends MemCachedClient {
 		return syncAll(null);
 	}
 
+	@SuppressWarnings({ "resource", "unchecked" })
 	public boolean syncAll(String[] servers) {
 
 		// get SockIOPool instance

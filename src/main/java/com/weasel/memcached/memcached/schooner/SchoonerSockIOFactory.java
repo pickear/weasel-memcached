@@ -11,6 +11,7 @@ import com.weasel.memcached.memcached.schooner.SchoonerSockIOPool.UDPSockIO;
  * @since 2.6.0
  * @see SchoonerSockIOFactory
  */
+@SuppressWarnings("rawtypes")
 public class SchoonerSockIOFactory extends BasePoolableObjectFactory {
 
 	protected GenericObjectPool sockets;
@@ -44,12 +45,14 @@ public class SchoonerSockIOFactory extends BasePoolableObjectFactory {
 		return socket;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void destroyObject(Object obj) throws Exception {
 		super.destroyObject(obj);
 		((SchoonerSockIO) obj).trueClose();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean validateObject(Object obj) {
 		return super.validateObject(obj);

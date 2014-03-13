@@ -47,8 +47,10 @@ import com.weasel.memcached.memcached.danga.SockIOPool;
  */
 public abstract class SchoonerSockIO extends SockIOPool.SockIO {
 
+	@SuppressWarnings("rawtypes")
 	protected GenericObjectPool sockets;
 
+	@SuppressWarnings("rawtypes")
 	public SchoonerSockIO(GenericObjectPool sockets, int bufferSize) throws UnknownHostException, IOException {
 		super(null, null, 0, 0, false);
 		this.sockets = sockets;

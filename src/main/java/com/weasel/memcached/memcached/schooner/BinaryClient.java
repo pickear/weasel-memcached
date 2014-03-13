@@ -134,6 +134,7 @@ public class BinaryClient extends MemCachedClient {
 		return delete(key, null, expiry);
 	}
 
+	@SuppressWarnings({ "resource", "unchecked" })
 	public boolean delete(String key, Integer hashCode, Date expiry) {
 
 		if (key == null) {
@@ -329,6 +330,7 @@ public class BinaryClient extends MemCachedClient {
 	 *            if not null, then the int hashcode to use
 	 * @return true/false indicating success
 	 */
+	@SuppressWarnings({ "resource", "unchecked" })
 	private boolean set(byte opcode, String key, Object value, Date expiry, Integer hashCode, long casUnique,
 			boolean asString) {
 
@@ -476,6 +478,7 @@ public class BinaryClient extends MemCachedClient {
 	 *            if not null, then the int hashcode to use
 	 * @return true/false indicating success
 	 */
+	@SuppressWarnings({ "resource", "unchecked" })
 	private boolean apPrepend(byte opcode, String key, Object value, Integer hashCode, Long casUnique) {
 
 		if (key == null) {
@@ -643,6 +646,7 @@ public class BinaryClient extends MemCachedClient {
 	 *            if not null, then the int hashcode to use
 	 * @return new value or -1 if not exist
 	 */
+	@SuppressWarnings({ "resource", "unchecked" })
 	private long incrdecr(byte opcode, String key, long inc, Integer hashCode) {
 
 		if (key == null) {
@@ -953,6 +957,7 @@ public class BinaryClient extends MemCachedClient {
 		return flushAll(null);
 	}
 
+	@SuppressWarnings({ "unchecked", "resource" })
 	public boolean flushAll(String[] servers) {
 
 		// get SockIOPool instance
@@ -1063,6 +1068,7 @@ public class BinaryClient extends MemCachedClient {
 		return stats(servers, OPCODE_STAT, String.format("cachedump %d %d", slabNumber, limit).getBytes());
 	}
 
+	@SuppressWarnings({ "resource", "unchecked" })
 	private Map<String, Map<String, String>> stats(String[] servers, byte opcode, byte[] reqKey) {
 
 		// get all servers and iterate over them
@@ -1219,6 +1225,7 @@ public class BinaryClient extends MemCachedClient {
 				channel.register(selector, SelectionKey.OP_WRITE, this);
 			}
 
+			@SuppressWarnings("unchecked")
 			public void close() {
 				try {
 					if (isDone) {
@@ -1441,6 +1448,7 @@ public class BinaryClient extends MemCachedClient {
 		return get(OPCODE_GET, key, hashCode, asString);
 	}
 
+	@SuppressWarnings("unchecked")
 	private Object get(byte opCode, String key, Integer hashCode, boolean asString) {
 		if (key == null) {
 			log.error("key is null for get()");
@@ -1556,6 +1564,7 @@ public class BinaryClient extends MemCachedClient {
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	private MemcachedItem gets(byte opCode, String key, Integer hashCode, boolean asString) {
 		if (key == null) {
 			log.error("key is null for get()");

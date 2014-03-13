@@ -188,6 +188,7 @@ public class SchoonerSockIOPool {
 	private TreeMap<Long, String> consistentBuckets;
 
 	// map to hold all available sockets
+	@SuppressWarnings("rawtypes")
 	private Map<String, GenericObjectPool> socketPool;
 
 	ConcurrentMap<String, Date> hostDead;
@@ -278,6 +279,7 @@ public class SchoonerSockIOPool {
 	/**
 	 * Initializes the pool.
 	 */
+	@SuppressWarnings("rawtypes")
 	public void initialize() {
 		initDeadLock.lock();
 		try {
@@ -313,6 +315,7 @@ public class SchoonerSockIOPool {
 		return isTcp;
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void populateBuckets() {
 		// store buckets in tree map
 		buckets = new ArrayList<String>();
@@ -341,6 +344,7 @@ public class SchoonerSockIOPool {
 		}
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void populateConsistentBuckets() {
 		// store buckets in tree map
 		consistentBuckets = new TreeMap<Long, String>();
@@ -397,6 +401,7 @@ public class SchoonerSockIOPool {
 	 * @param host
 	 *            host to clear
 	 */
+	@SuppressWarnings("rawtypes")
 	protected void clearHostFromPool(String host) {
 		GenericObjectPool pool = getSocketPool().get(host);
 		pool.clear();
@@ -517,6 +522,7 @@ public class SchoonerSockIOPool {
 	 *            host from which to retrieve object
 	 * @return SockIO object or null if fail to retrieve one
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public final SchoonerSockIO getConnection(String host) {
 		if (!this.initialized) {
 			log.error("attempting to get SockIO from uninitialized pool!");
@@ -581,6 +587,7 @@ public class SchoonerSockIOPool {
 	 * @param pool
 	 *            pool to close
 	 */
+	@SuppressWarnings("rawtypes")
 	protected final void closeSocketPool() {
 		for (Iterator<GenericObjectPool> i = getSocketPool().values().iterator(); i.hasNext();) {
 			GenericObjectPool sockets = i.next();
@@ -1039,10 +1046,12 @@ public class SchoonerSockIOPool {
 		return bufferSize;
 	}
 
+	@SuppressWarnings("rawtypes")
 	public Map<String, GenericObjectPool> getSocketPool() {
 		return socketPool;
 	}
 
+	@SuppressWarnings("rawtypes")
 	public void setSocketPool(Map<String, GenericObjectPool> socketPool) {
 		this.socketPool = socketPool;
 	}
@@ -1133,6 +1142,7 @@ public class SchoonerSockIOPool {
 			}
 		}
 
+		@SuppressWarnings("rawtypes")
 		public UDPSockIO(GenericObjectPool sockets, String host, int bufferSize, int timeout) throws IOException,
 				UnknownHostException {
 			super(sockets, bufferSize);
@@ -1267,6 +1277,7 @@ public class SchoonerSockIOPool {
 			return ret;
 		}
 
+		@SuppressWarnings("unchecked")
 		@Override
 		public void close() {
 			readBuf.clear();
@@ -1351,6 +1362,7 @@ public class SchoonerSockIOPool {
 		 * @throws UnknownHostException
 		 *             if hostname is invalid
 		 */
+		@SuppressWarnings("rawtypes")
 		public TCPSockIO(GenericObjectPool sockets, String host, int bufferSize, int timeout, int connectTimeout,
 				boolean noDelay) throws IOException, UnknownHostException {
 
@@ -1467,6 +1479,7 @@ public class SchoonerSockIOPool {
 		 * sets closed flag and checks in to connection pool but does not close
 		 * connections
 		 */
+		@SuppressWarnings("unchecked")
 		public final void close() {
 			readBuf.clear();
 			try {

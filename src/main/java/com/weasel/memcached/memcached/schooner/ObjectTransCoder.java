@@ -88,6 +88,7 @@ public class ObjectTransCoder extends AbstractTransCoder {
 	 * @throws IOException
 	 *             error happened in decoding the input stream.
 	 */
+	@SuppressWarnings("resource")
 	public Object decode(InputStream input, ClassLoader classLoader) throws IOException {
 		Object obj = null;
 		ContextObjectInputStream ois = new ContextObjectInputStream(input, classLoader);

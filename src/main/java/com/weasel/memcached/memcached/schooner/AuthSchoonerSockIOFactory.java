@@ -56,6 +56,7 @@ public class AuthSchoonerSockIOFactory extends SchoonerSockIOFactory {
 		throw new Exception();
 	}
 
+	@SuppressWarnings("resource")
 	private byte[] sendAuthData(SchoonerSockIO sock, byte opcode, String mechanism, byte[] authData) throws Exception {
 		sock.writeBuf.clear();
 		sock.writeBuf.put(MemCachedClient.MAGIC_REQ);

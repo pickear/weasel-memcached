@@ -249,6 +249,7 @@ public class AscIIUDPClient extends MemCachedClient {
 	 *            if not null, then the int hashcode to use
 	 * @return true/false indicating success
 	 */
+	@SuppressWarnings("unchecked")
 	private boolean set(String cmdname, String key, Object value, Date expiry, Integer hashCode, Long casUnique) {
 
 		if (cmdname == null || key == null) {
@@ -382,6 +383,7 @@ public class AscIIUDPClient extends MemCachedClient {
 		return flushAll(null);
 	}
 
+	@SuppressWarnings("unchecked")
 	public boolean flushAll(String[] servers) {
 		// get SockIOPool instance
 		// return false if unable to get SockIO obj
@@ -566,6 +568,7 @@ public class AscIIUDPClient extends MemCachedClient {
 	 *            specified hashcode
 	 * @return memcached item with value in it.
 	 */
+	@SuppressWarnings("unchecked")
 	private MemcachedItem get(String cmd, String key, Integer hashCode) {
 		MemcachedItem item = new MemcachedItem();
 
@@ -663,6 +666,7 @@ public class AscIIUDPClient extends MemCachedClient {
 		return stats(servers, "stats slabs\r\n", STATS);
 	}
 
+	@SuppressWarnings("unchecked")
 	public boolean sync(String key, Integer hashCode) {
 		if (key == null) {
 			log.error("null value for key passed to delete()");
@@ -711,6 +715,7 @@ public class AscIIUDPClient extends MemCachedClient {
 		return syncAll(null);
 	}
 
+	@SuppressWarnings("unchecked")
 	public boolean syncAll(String[] servers) {
 		// get SockIOPool instance
 		// return false if unable to get SockIO obj
@@ -770,6 +775,7 @@ public class AscIIUDPClient extends MemCachedClient {
 		return success;
 	}
 
+	@SuppressWarnings("unchecked")
 	public boolean delete(String key, Integer hashCode, Date expiry) {
 
 		if (key == null) {
@@ -832,6 +838,7 @@ public class AscIIUDPClient extends MemCachedClient {
 	 *            if not null, then the int hashcode to use
 	 * @return new value or -1 if not exist
 	 */
+	@SuppressWarnings("unchecked")
 	private long incrdecr(String cmdname, String key, long inc, Integer hashCode) {
 
 		if (key == null) {
@@ -893,6 +900,7 @@ public class AscIIUDPClient extends MemCachedClient {
 		return -1;
 	}
 
+	@SuppressWarnings("unchecked")
 	private Map<String, Map<String, String>> stats(String[] servers, String command, String lineStart) {
 
 		if (command == null || command.trim().equals("")) {
