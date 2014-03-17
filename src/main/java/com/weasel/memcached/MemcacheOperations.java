@@ -1,6 +1,5 @@
 package com.weasel.memcached;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Map;
@@ -41,7 +40,7 @@ public class MemcacheOperations implements MemcacheRepository{
 	 * 
 	 */
 	@SuppressWarnings("unchecked")
-	public <T extends Serializable> T get(String key) {
+	public <T> T get(String key) {
 		DemonPredict.notNull(key, "key must not be null...");
 		T  entity = (T) memcache.get(key);
 		if(LOG.isDebugEnabled()){
@@ -55,7 +54,7 @@ public class MemcacheOperations implements MemcacheRepository{
 	 * @param key
 	 * @param entity
 	 */
-	public <T extends Serializable> void save(String key,T entity) {
+	public <T> void save(String key,T entity) {
 		DemonPredict.notNull(entity, "entity must not be null...");
 		if(LOG.isDebugEnabled()){
 			LOG.debug("begin save the "+entity+" to memcache");
@@ -68,7 +67,7 @@ public class MemcacheOperations implements MemcacheRepository{
 	 * @param entity
 	 * @param autoRemoveTime
 	 */
-	public <T extends Serializable> void save(String key,T entity,Date autoRemoveTime){
+	public <T> void save(String key,T entity,Date autoRemoveTime){
 		DemonPredict.notNull(entity, "entity must not be null...");
 		if(LOG.isDebugEnabled()){
 			LOG.debug("begin save the "+entity+" to memcache");
@@ -81,7 +80,7 @@ public class MemcacheOperations implements MemcacheRepository{
 	 * @param key
 	 * @param entity
 	 */
-	public <T extends Serializable> void add(String key,T entity) {
+	public <T> void add(String key,T entity) {
 		DemonPredict.notNull(entity, "entity must not be null...");
 		if(LOG.isDebugEnabled()){
 			LOG.debug("begin add the "+entity+" to memcache");
@@ -94,7 +93,7 @@ public class MemcacheOperations implements MemcacheRepository{
 	 * @param entity
 	 * @param date
 	 */
-	public <T extends Serializable> void add(String key,T entity,Date autoRemoveTime){
+	public <T> void add(String key,T entity,Date autoRemoveTime){
 		DemonPredict.notNull(entity, "entity must not be null...");
 		if(LOG.isDebugEnabled()){
 			LOG.debug("begin add the "+entity+" to memcache");
@@ -118,7 +117,7 @@ public class MemcacheOperations implements MemcacheRepository{
 	 * @param key
 	 * @param entity
 	 */
-	public <T extends Serializable> void update(String key,T entity) {
+	public <T> void update(String key,T entity) {
 		DemonPredict.notNull(entity, "entity must not be null...");
 		if(LOG.isDebugEnabled()){
 			LOG.debug("begin update the "+entity+" to memcache");
@@ -132,7 +131,7 @@ public class MemcacheOperations implements MemcacheRepository{
 	 * @param entity
 	 * @param autoRemoveTime
 	 */
-	public <T extends Serializable> void update(String key,T entity,Date autoRemoveTime){
+	public <T> void update(String key,T entity,Date autoRemoveTime){
 		DemonPredict.notNull(entity, "entity must not be null...");
 		if(LOG.isDebugEnabled()){
 			LOG.debug("begin update the "+entity+" to memcache");

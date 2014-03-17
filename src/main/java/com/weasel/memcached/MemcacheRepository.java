@@ -1,6 +1,5 @@
 package com.weasel.memcached;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
@@ -13,35 +12,35 @@ public interface MemcacheRepository {
 	/**
 	 * 从memcache中得到的是一个json格式的字符串，转化为想要的实体
 	 */
-	<T extends Serializable> T get(String key) ;
+	<T> T get(String key) ;
 
 	/**
 	 * 为了不同类型的转换，保存的时候以json格式保存到memcache,默认12小时后自动从memcache删除
 	 * @param key
 	 * @param entity
 	 */
-	<T extends Serializable> void save(String key,T entity) ;
+	<T> void save(String key,T entity) ;
 	/**
 	 * 
 	 * @param key
 	 * @param entity
 	 * @param autoRemoveTime
 	 */
-	<T extends Serializable> void save(String key,T entity,Date autoRemoveTime);
+	<T> void save(String key,T entity,Date autoRemoveTime);
 
 	/**
 	 * 为了不同类型的转换，保存的时候以json格式保存到memcache，默认12小时后自动从memcache删除
 	 * @param key
 	 * @param entity
 	 */
-	<T extends Serializable> void add(String key,T entity);
+	<T> void add(String key,T entity);
 	/**
 	 * 
 	 * @param key
 	 * @param entity
 	 * @param date
 	 */
-	<T extends Serializable> void add(String key,T entity,Date autoRemoveTime);
+	<T> void add(String key,T entity,Date autoRemoveTime);
 
 	/**
 	 * 根据标识，从memcache中删除
@@ -53,7 +52,7 @@ public interface MemcacheRepository {
 	 * @param key
 	 * @param entity
 	 */
-	<T extends Serializable> void update(String key,T entity) ;
+	<T> void update(String key,T entity) ;
 	
 	/**
 	 * 
@@ -61,7 +60,7 @@ public interface MemcacheRepository {
 	 * @param entity
 	 * @param autoRemoveTime
 	 */
-	<T extends Serializable> void update(String key,T entity,Date autoRemoveTime);
+	<T> void update(String key,T entity,Date autoRemoveTime);
 	
 	/**
 	 * 获得memcache所有key
