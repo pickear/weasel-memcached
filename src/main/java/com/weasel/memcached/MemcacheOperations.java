@@ -8,7 +8,7 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.weasel.core.helper.DemonPredict;
+import com.weasel.lang.helper.DemonPredict;
 import com.weasel.memcached.config.MemcacheConfig;
 import com.weasel.memcached.memcached.danga.MemCachedClient;
 import com.weasel.memcached.util.MemcachePropertiesReader;
